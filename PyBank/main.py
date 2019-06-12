@@ -17,15 +17,18 @@ with open(csvpath) as csvfile:
     amount_list = []
     date_list = []
     
+    # iterate through the file
     for row in csvreader:
         number_of_months += 1
         date_list.append(row[0])
         amount_list.append(row[1])
         amount_list_to_int = list(map(int, amount_list))
-        total_amount = sum(amount_list_to_int)
-
+        
+        
+    total_amount = sum(amount_list_to_int)
     
-    average = statistics.mean(amount_list_to_int)
+    amount_diff_list = [j-i for i, j in zip(amount_list_to_int[:-1], amount_list_to_int[1:])]
+    average = '%.2f' % statistics.mean(amount_diff_list)
     
     greatest_increase = max(amount_list_to_int)
     greatest_increase_index = amount_list_to_int.index(greatest_increase)
